@@ -1,5 +1,3 @@
-Sure! Here is a sample README file for your Django project that outlines the steps to install and set up the project from a GitHub repository.
-
 ````markdown
 # Dechentsemo Central School Website
 
@@ -29,8 +27,8 @@ Follow these steps to set up the project locally:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/imprashant98/school_project.git
+cd school_project
 ```
 ````
 
@@ -114,7 +112,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Contact
 
-For any questions or suggestions, please contact us at [prashantkarna21@gmail.com or karmadurant35@gmail.com](mailto:prashantkarna21@gmail.com).
+For any questions or suggestions, please contact us at [pk.dechentsemocs@education.gov.bt](mailto:pk.dechentsemocs@education.gov.bt).
 
 ```
 
