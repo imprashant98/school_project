@@ -1,9 +1,9 @@
 ````markdown
-# Dechentsemo Central School Website
+#Dechentsemo Central School Website
 
 This project is a Django-based website for Dechentsemo Central School, featuring a dashboard, calendar, to-do list, pie charts, and attendance management.
 
-## Table of Contents
+**Table of Contents**
 
 - [Features](#features)
 - [Installation](#installation)
@@ -12,7 +12,7 @@ This project is a Django-based website for Dechentsemo Central School, featuring
 - [License](#license)
 - [Contact](#contact)
 
-## Features
+**Features**
 
 - Dashboard displaying various school activities and statistics.
 - Calendar for managing and viewing school events.
@@ -20,11 +20,11 @@ This project is a Django-based website for Dechentsemo Central School, featuring
 - Pie charts showing the distribution of students and teachers.
 - Attendance management system.
 
-## Installation
+**Installation**
 
 Follow these steps to set up the project locally:
 
-### 1. Clone the Repository
+###1. Clone the Repository
 
 ```bash
 git clone https://github.com/imprashant98/school_project.git
