@@ -1,0 +1,32 @@
+{% extends 'school_app/base.html' %} {% block title %}Todo List - Dechentsemo
+Central School{% endblock %} {% block content %}
+<section class="todo-list mt-5 mb-5">
+  {% load static %}
+  <div class="container">
+    <h2 class="text-center">Todo List</h2>
+    <div class="row mt-4">
+      <div class="col-md-8 offset-md-2">
+        <ul class="list-group">
+          {% for todo in todos %}
+          <li
+            class="list-group-item d-flex justify-content-between align-items-center"
+          >
+            {{ todo.task }}
+            <span>
+              {% if todo.completed %}
+              <span class="badge bg-success">Completed</span>
+              {% else %}
+              <span class="badge bg-warning">Pending</span>
+              {% endif %}
+            </span>
+          </li>
+          {% endfor %}
+        </ul>
+        <div class="text-center mt-4">
+          <a href="{% url 'add_todo' %}" class="btn btn-primary">Add Todo</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'school_app/base.html' %} {% block title %}Event Details -
+Dechentsemo Central School{% endblock %} {% block content %}
+<section class="event-details mt-5 mb-5">
+  {% load static %}
+  <div class="container">
+    <h2 class="text-center">{{ event.title }}</h2>
+    <div class="row mt-4">
+      <div class="col-md-8 offset-md-2">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ event.title }}</h5>
+            <p class="card-text">{{ event.description }}</p>
+            <p class="card-text">
+              <small class="text-muted">
+                Start: {{ event.start_time }} <br />
+                End: {{ event.end_time }}
+              </small>
+            </p>
+            <a href="{% url 'dashboard' %}" class="btn btn-primary"
+              >Back to Dashboard</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
