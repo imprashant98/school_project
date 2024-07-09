@@ -112,7 +112,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Contact
 
-For any questions or suggestions, please contact us at [pk.dechentsemocs@education.gov.bt](mailto:pk.dechentsemocs@education.gov.bt).
+For any questions or suggestions, please contact us at prashantkarna21@gmail.com and karmadurant35@gmail.com.
 
 ```
 
