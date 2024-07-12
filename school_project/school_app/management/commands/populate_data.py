@@ -1,58 +1,173 @@
-from django.core.management.base import BaseCommand
-from school_app.models import Student, Teacher, Event, Todo
+# school_app/management/commands/populate_db.py
 
+from django.core.management.base import BaseCommand
+from school_app.models import Student, Teacher, Attendance, Result, Event, Todo, ClassCleanliness, ClubReport, LogBook, ReadingLog, StaffAttendance, SUPWReport, TeachersSubstitution, TeachersTimetable, TODReport, OrganizationChart, ProfessionalDevelopment, PLCReport
+import random
+from datetime import date, datetime, timedelta
 
 class Command(BaseCommand):
-    help = 'Populate initial data into the database'
+    help = 'Populates the database with Bhutanese details'
 
     def handle(self, *args, **kwargs):
         # Clear existing data
-        Student.objects.all().delete()
-        Teacher.objects.all().delete()
-        Event.objects.all().delete()
-        Todo.objects.all().delete()
+        self.clear_data()
 
-        # Create sample teachers
-        teachers = [
-            {'first_name': 'John', 'last_name': 'Doe',
-                'email': 'john.doe@example.com', 'subject': 'Math'},
-            {'first_name': 'Jane', 'last_name': 'Smith',
-                'email': 'jane.smith@example.com', 'subject': 'Science'}
-        ]
-        for teacher in teachers:
-            Teacher.objects.create(**teacher)
-
-        # Create sample students
+        # Populate Students
         students = [
-            {'first_name': 'Alice', 'last_name': 'Johnson',
-                'email': 'alice.johnson@example.com', 'class_name': '5A', 'gender': 'Female'},
-            {'first_name': 'Bob', 'last_name': 'Brown',
-                'email': 'bob.brown@example.com', 'class_name': '5A', 'gender': 'Male'},
-            {'first_name': 'Charlie', 'last_name': 'Davis',
-                'email': 'charlie.davis@example.com', 'class_name': '5B', 'gender': 'Male'},
-            {'first_name': 'Diana', 'last_name': 'Evans',
-                'email': 'diana.evans@example.com', 'class_name': '5B', 'gender': 'Female'}
+            ('Pema', 'Dorji', 'pema.dorji@example.com', '10A', 'Male'),
+            ('Sonam', 'Choden', 'sonam.choden@example.com', '10B', 'Female'),
+            ('Jigme', 'Wangchuk', 'jigme.wangchuk@example.com', '9A', 'Male'),
         ]
-        for student in students:
-            Student.objects.create(**student)
 
-        # Create sample events
-        events = [
-            {'title': 'School Annual Day', 'description': 'Annual day celebration.',
-                'start_time': '2024-09-25 10:00:00', 'end_time': '2024-09-25 14:00:00'},
-            {'title': 'Science Fair', 'description': 'Annual science fair.',
-                'start_time': '2024-10-15 09:00:00', 'end_time': '2024-10-15 12:00:00'}
+        for first_name, last_name, email, class_name, gender in students:
+            Student.objects.create(
+                first_name=first_name,
+                last_name=last_name,
+                email=email,
+                class_name=class_name,
+                gender=gender,
+            )
+
+        # Populate Teachers
+        teachers = [
+            ('Karma', 'Wangdi', 'karma.wangdi@example.com', 'Mathematics'),
+            ('Tshering', 'Yangzom', 'tshering.yangzom@example.com', 'Science'),
+            ('Dawa', 'Tshering', 'dawa.tshering@example.com', 'English'),
         ]
-        for event in events:
-            Event.objects.create(**event)
 
-        # Create sample todos
-        todos = [
-            {'task': 'Prepare for annual day', 'completed': False},
-            {'task': 'Science fair presentation', 'completed': True}
-        ]
-        for todo in todos:
-            Todo.objects.create(**todo)
+        for first_name, last_name, email, subject in teachers:
+            Teacher.objects.create(
+                first_name=first_name,
+                last_name=last_name,
+                email=email,
+                subject=subject,
+            )
 
-        self.stdout.write(self.style.SUCCESS(
-            'Successfully populated the database with initial data.'))
+        # Populate Attendance
+        for teacher in Teacher.objects.all():
+            for i in range(10):  # 10 random attendance records
+                Attendance.objects.create(
+                    teacher=teacher,
+                    date=date.today() - timedelta(days=i),
+                    status=random.choice(['Present', 'Absent']),
+                )
+
+        # Populate Results
+        for student in Student.objects.all():
+            for subject in ['Mathematics', 'Science', 'English']:
+                Result.objects.create(
+                    student=student,
+                    subject=subject,
+                    marks=random.randint(40, 100),
+                )
+
+        # Populate Events
+        Event.objects.create(
+            title='Annual Sports Day',
+            description='A day full of sports activities and competitions.',
+            start_time=datetime.now() + timedelta(days=5),
+            end_time=datetime.now() + timedelta(days=5, hours=6),
+        )
+
+        # Populate Todos
+        todos = ['Prepare for exam', 'Complete homework', 'Attend meeting']
+        for task in todos:
+            Todo.objects.create(
+                task=task,
+                completed=random.choice([True, False]),
+            )
+
+        # Populate Class Cleanliness
+        for class_name in ['10A', '10B', '9A']:
+            for i in range(5):  # 5 records per class
+                ClassCleanliness.objects.create(
+                    date=date.today() - timedelta(days=i),
+                    class_name=class_name,
+                    cleanliness_score=random.randint(1, 10),
+                )
+
+        # Populate Club Reports
+        clubs = ['Science Club', 'Literary Club', 'Sports Club']
+        for club_name in clubs:
+            ClubReport.objects.create(
+                date=date.today(),
+                club_name=club_name,
+                report=f'{club_name} had a successful event today.',
+            )
+
+        # Populate Log Book
+        for i in range(10):  # 10 log book entries
+            LogBook.objects.create(
+                date=date.today() - timedelta(days=i),
+                entry=f'Today was a productive day {i}.',
+            )
+
+        # Populate Reading Log
+        for student in Student.objects.all():
+            ReadingLog.objects.create(
+                date=date.today(),
+                student_name=f'{student.first_name} {student.last_name}',
+                book_title=f'Book {random.randint(1, 10)}',
+            )
+
+        # Populate Staff Attendance
+        for teacher in Teacher.objects.all():
+            StaffAttendance.objects.create(
+                date=date.today(),
+                teacher_name=f'{teacher.first_name} {teacher.last_name}',
+                present=random.choice([True, False]),
+            )
+
+        # Populate SUPW Reports
+        SUPWReport.objects.create(
+            date=date.today(),
+            activity_name='Community Service',
+            report='Students participated in community service activities.'
+        )
+
+        # Populate Teachers Substitution
+        TeachersSubstitution.objects.create(
+            date=date.today(),
+            teacher_name='Karma Wangdi',
+            substitute_teacher='Dawa Tshering',
+            reason='Medical Leave',
+        )
+
+        # Populate Teachers Timetable
+        TeachersTimetable.objects.create(
+            date=date.today(),
+            teacher_name='Tshering Yangzom',
+            timetable='9:00 AM - 10:00 AM: Science, 10:15 AM - 11:15 AM: Physics'
+        )
+
+        # Populate TOD Reports
+        TODReport.objects.create(
+            date=date.today(),
+            report_details='Teacher on duty report for today.'
+        )
+
+        # Populate Organization Chart
+        OrganizationChart.objects.create(
+            date=date.today(),
+            chart='Organization chart details here.'
+        )
+
+        # Populate Professional Development
+        ProfessionalDevelopment.objects.create(
+            date=date.today(),
+            activity_name='Workshop on Teaching Methods',
+            details='Details about the workshop on teaching methods.'
+        )
+
+        # Populate PLC Reports
+        PLCReport.objects.create(
+            date=date.today(),
+            report='PLC meeting report details here.'
+        )
+
+        self.stdout.write(self.style.SUCCESS('Database populated successfully!'))
+
+    def clear_data(self):
+        models = [Student, Teacher, Attendance, Result, Event, Todo, ClassCleanliness, ClubReport, LogBook, ReadingLog, StaffAttendance, SUPWReport, TeachersSubstitution, TeachersTimetable, TODReport, OrganizationChart, ProfessionalDevelopment, PLCReport]
+        for model in models:
+            model.objects.all().delete()

@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 
 :root {
   --primary: #065dfd;
@@ -8,7 +7,7 @@
 }
 
 /*******
-Custome CSS
+Custom CSS
 *******/
 * {
   margin: 0;
@@ -133,7 +132,7 @@ header .nav-item .nav-link {
 }
 
 /******************
-Feature sectiom
+Feature section
 ******************/
 
 .feature .main-feature-box {
@@ -175,13 +174,13 @@ Feature sectiom
 }
 
 /******************
-About sectiom
+About section
 ******************/
 .about {
   position: relative;
 }
 
-.about spam {
+.about span {
   display: block;
   margin-bottom: 5px;
   color: var(--primary);
@@ -216,7 +215,7 @@ About sectiom
 }
 
 /******************
-Dashboard sectiom
+Dashboard section
 ******************/
 
 .dashboard .single-dashboard-box {
@@ -231,7 +230,6 @@ Dashboard sectiom
 .dashboard .single-dashboard-box .icon {
   margin-bottom: 21px;
   width: 100%;
-
 }
 
 .dashboard .single-dashboard-box h3 {
@@ -242,9 +240,14 @@ Dashboard sectiom
 
 .navbar-custom {
   background-color: #065dfb;
-  /* Change this to your desired background color */
   border-bottom: solid 3px #0647c9;
-  /* Optional: Add a border to differentiate */
+  font-size: 14px;
+  /* Decrease font size for smaller navbar */
+}
+
+.navbar-custom .navbar-brand img {
+  width: 80px;
+  /* Decrease logo size for smaller navbar */
 }
 
 .navbar-custom .navbar-brand,
@@ -262,4 +265,9 @@ Dashboard sectiom
 
 .navbar-custom .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.content-wrapper {
+  padding-top: 20px;
+  /* Add some space between the content and navbar */
 }

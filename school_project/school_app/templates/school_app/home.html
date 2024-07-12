@@ -9,10 +9,10 @@ School{% endblock %} {% block content %}
   >
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <div class="corousel-background">
+        <div class="carousel-background">
           <img src="{% static 'Images/Slider/slider2.jpg' %}" alt="" />
           <div class="carousel-container">
-            <div class="corousel-content-container">
+            <div class="carousel-content-container">
               <h2>Welcome To DECHENTSEMO CS</h2>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -32,10 +32,10 @@ School{% endblock %} {% block content %}
         </div>
       </div>
       <div class="carousel-item">
-        <div class="corousel-background">
+        <div class="carousel-background">
           <img src="{% static 'Images/Slider/slider3.jpg' %}" alt="" />
           <div class="carousel-container">
-            <div class="corousel-content-container">
+            <div class="carousel-content-container">
               <h2>Welcome To DECHENTSEMO CS</h2>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -139,415 +139,30 @@ School{% endblock %} {% block content %}
   </div>
 </section>
 
-<!--Dashboard-->
-<secton class="dashboard mt-5 mb-5">
+<section class="dashboard mt-5 mb-5">
   <div class="container">
     <div class="row">
       <h2 class="text-center">School Dashboard</h2>
     </div>
     <div class="row mt-5">
+      {% for item in dashboard_items %}
       <div class="col-lg-4">
-        <div class="single-dashboard-box border">
+        <a
+          href="{% url item.url_name %}"
+          class="single-dashboard-box border d-block text-decoration-none"
+        >
           <div class="icon">
             <img
-              src="{% static 'Images/dashboard/class-cleanliness.png' %}"
+              src="{% static item.img_path %}"
               class="img-fluid"
-              alt=""
+              alt="{{ item.title }}"
             />
           </div>
-          <h3>Class Cleanliness</h3>
-          <div class="buttons">
-            <a
-              href="https://docs.google.com/spreadsheets/d/1tCZ2O1viwPFkf1xUiaCaoC7hNbYpPEfFu2d57eR4Xac/edit?gid=0#gid=0"
-              class="button3"
-            >
-              Activity<i class="bi bi-arrow-right-circle-fill"></i>
-            </a>
-          </div>
-        </div>
+          <h3>{{ item.title }}</h3>
+        </a>
       </div>
-
-      <div class="col-lg-4">
-        <div class="single-dashboard-box border">
-          <div class="icon">
-            <img
-            src="{% static 'Images/dashboard/club-report.png' %}"
-            class="img-fluid"
-            alt=""
-            />
-          </div>
-          <h3>Club Report</h3>
-          <div class="buttons">
-            <a
-              href="https://docs.google.com/spreadsheets/d/1y7tXVWm8C4u613vmlA49yyXl4dMBpysL/edit?usp=drive_web&ouid=101685195911942387182&rtpof=true"
-              class="button3"
-            >
-              Activity<i class="bi bi-arrow-right-circle-fill"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4">
-        <div class="single-dashboard-box border">
-          <div class="icon">
-            <img
-            src="{% static 'Images/dashboard/log-book.png' %}"
-            class="img-fluid"
-            alt=""
-            />
-          </div>
-          <h3>Log Book</h3>
-          <div class="buttons">
-            <a
-              href="https://docs.google.com/spreadsheets/d/1SNcwoMzBMeZhnIjAKZWJfL1jaZgJ2BVj/edit?gid=1519335935#gid=1519335935"
-              class="button3"
-            >
-              Activity<i class="bi bi-arrow-right-circle-fill"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4">
-        <div class="single-dashboard-box border">
-          <div class="icon">
-            <img
-            src="{% static 'Images/dashboard/reading-log.png' %}"
-              class="img-fluid"
-              alt=""
-            />
-          </div>
-          <h3>Reading Log</h3>
-          <div class="buttons">
-            <a
-              href="https://docs.google.com/spreadsheets/d/1Fe_KNHlYGklYJSqi9sdkiftvqhJx11-8/edit?gid=1753761684#gid=1753761684"
-              class="button3"
-            >
-              Activity<i class="bi bi-arrow-right-circle-fill"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4">
-        <div class="single-dashboard-box border">
-          <div class="icon">
-            <img
-            src="{% static 'Images/dashboard/staff-attendance.png' %}"
-            class="img-fluid"
-            alt=""
-            />
-          </div>
-          <h3>Staff Attendance</h3>
-          <div class="buttons">
-            <a
-              href="https://docs.google.com/spreadsheets/d/1VF7e24KI36dMKPcmx3iXbW21cPKchkZG/edit?gid=1392051055#gid=1392051055"
-              class="button3"
-            >
-              Activity<i class="bi bi-arrow-right-circle-fill"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4">
-        <div class="single-dashboard-box border">
-          <div class="icon">
-            <img
-            src="{% static 'Images/dashboard/student-attendance.png' %}"
-            class="img-fluid"
-            alt=""
-            />
-          </div>
-          <h3>Student Attendance</h3>
-          <div class="buttons">
-            <a
-              href="https://docs.google.com/spreadsheets/d/1227OgGaZAfFor1ghkVz7lzHFCrnI0g3G/edit?gid=2013550597#gid=2013550597"
-              class="button3"
-            >
-              Activity<i class="bi bi-arrow-right-circle-fill"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4">
-        <div class="single-dashboard-box border">
-          <div class="icon">
-            <img
-            src="{% static 'Images/dashboard/supw-report.png' %}"
-            class="img-fluid"
-            alt=""
-            />
-          </div>
-          <h3>SUPW Report</h3>
-          <div class="buttons">
-            <a
-              href="https://docs.google.com/spreadsheets/d/1mMdBDMpJxIkUySHAlJ-LylpEjZOVGOXy/edit?gid=413378863#gid=413378863"
-              class="button3"
-            >
-              Activity<i class="bi bi-arrow-right-circle-fill"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4">
-        <div class="single-dashboard-box border">
-          <div class="icon">
-            <img
-            src="{% static 'Images/dashboard/teachers-substitution.png' %}"
-            class="img-fluid"
-            alt=""
-            />
-          </div>
-          <h3>Teachers Substitution</h3>
-          <div class="buttons">
-            <a
-              href="https://docs.google.com/spreadsheets/d/1d3xK6TTXeW7h59iF0MwgTWOkuz7GYhFWiHT6KfYsSYE/edit?gid=0#gid=0"
-              class="button3"
-            >
-              Activity<i class="bi bi-arrow-right-circle-fill"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4">
-        <div class="single-dashboard-box border">
-          <div class="icon">
-            <img
-            src="{% static 'Images/dashboard/teachers-timetable.png' %}"
-              class="img-fluid"
-              alt=""
-            />
-          </div>
-          <h3>Teacher's Timetable</h3>
-          <div class="buttons">
-            <a
-              href="https://docs.google.com/spreadsheets/d/1_eOTdq5BT-sPGKCcmxfumRjZ8BOT44Zo/edit?gid=1579606760#gid=1579606760"
-              class="button3"
-            >
-              Activity<i class="bi bi-arrow-right-circle-fill"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4">
-        <div class="single-dashboard-box border">
-          <div class="icon">
-            <img
-            src="{% static 'Images/dashboard/tod-report.png' %}"
-            class="img-fluid"
-            alt=""
-            />
-          </div>
-          <h3>TOD Report</h3>
-          <div class="buttons">
-            <a
-              href="https://docs.google.com/spreadsheets/d/1Q9DBm28ph3QxtLM-FpAkGiDa1u3XEs0A/edit?gid=1504848622#gid=1504848622"
-              class="button3"
-            >
-              Activity<i class="bi bi-arrow-right-circle-fill"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4">
-        <div class="single-dashboard-box border">
-          <div class="icon">
-            <img
-            src="{% static 'Images/dashboard/organogram.png' %}"
-            class="img-fluid"
-            alt=""
-            />
-          </div>
-          <h3>Organization Chart</h3>
-          <div class="buttons">
-            <a
-              href="https://docs.google.com/spreadsheets/d/1EAN_mWypEfKf3l14te1nmL5x7rCUeHK5/edit?gid=1306306369#gid=1306306369"
-              class="button3"
-            >
-              Activity<i class="bi bi-arrow-right-circle-fill"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4">
-        <div class="single-dashboard-box border">
-          <div class="icon">
-            <img
-            src="{% static 'Images/dashboard/pd.png' %}"
-            class="img-fluid"
-            alt=""
-            />
-          </div>
-          <h3>Professional Development</h3>
-          <div class="buttons">
-            <a
-              href="https://docs.google.com/spreadsheets/d/1hyWPE-CbCgUNJLv6gUPk46vkhmlcYXqm/edit?gid=1027864726#gid=1027864726"
-              class="button3"
-            >
-              Activity<i class="bi bi-arrow-right-circle-fill"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4">
-        <div class="single-dashboard-box border">
-          <div class="icon">
-            <img
-            src="{% static 'Images/dashboard/plc-report.png' %}"
-            class="img-fluid"
-            alt=""
-            />
-          </div>
-          <h3>PLC Report</h3>
-          <div class="buttons">
-            <a
-              href="https://docs.google.com/spreadsheets/d/1SsSe8kUfTjWGqljPOgWL6vGGz8d6Z-WV/edit?gid=1902096802#gid=1902096802"
-              class="button3"
-            >
-              Activity<i class="bi bi-arrow-right-circle-fill"></i>
-            </a>
-          </div>
-        </div>
-      </div>
+      {% endfor %}
     </div>
   </div>
-</secton>
-
-<footer
-class="text-center text-lg-start text-white pt-4"
-style="background-color: #065dfb"
->
-<!-- Section: Social media -->
-<section
-  class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
->
-  <!-- Left -->
-  <div class="me-5 d-none d-lg-block">
-    <span>Get connected with us on social networks:</span>
-  </div>
-  <!-- Left -->
-
-  <!-- Right -->
-  <div>
-    <a href="" class="me-4 text-reset">
-      <i class="fab fa-facebook-f"></i>
-    </a>
-    <a href="" class="me-4 text-reset">
-      <i class="fab fa-twitter"></i>
-    </a>
-    <a href="" class="me-4 text-reset">
-      <i class="fab fa-google"></i>
-    </a>
-    <a href="" class="me-4 text-reset">
-      <i class="fab fa-instagram"></i>
-    </a>
-    <a href="" class="me-4 text-reset">
-      <i class="fab fa-linkedin"></i>
-    </a>
-    <a href="" class="me-4 text-reset">
-      <i class="fab fa-github"></i>
-    </a>
-  </div>
-  <!-- Right -->
 </section>
-<!-- Section: Social media -->
-
-<!-- Section: Links  -->
-<section class="">
-  <div class="container text-center text-md-start mt-5">
-    <!-- Grid row -->
-    <div class="row mt-3">
-      <!-- Grid column -->
-      <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-        <!-- Content -->
-        <h6 class="text-uppercase fw-bold mb-4">
-          Dechentsemo Central School
-        </h6>
-        <p>
-          Here you can use rows and columns to organize your footer
-          content. Lorem ipsum dolor sit amet, consectetur adipisicing
-          elit.
-        </p>
-      </div>
-      <!-- Grid column -->
-
-      <!-- Grid column -->
-      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-        <!-- Links -->
-        <h6 class="text-uppercase fw-bold mb-4">Products</h6>
-        <p>
-          <a href="#!" class="text-reset">Home</a>
-        </p>
-        <p>
-          <a href="#!" class="text-reset">About</a>
-        </p>
-        <p>
-          <a href="#!" class="text-reset">Gallery</a>
-        </p>
-        <p>
-          <a href="#!" class="text-reset">Contact Us</a>
-        </p>
-      </div>
-      <!-- Grid column -->
-
-      <!-- Grid column -->
-      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-        <!-- Links -->
-        <h6 class="text-uppercase fw-bold mb-4">Useful links</h6>
-        <p>
-          <a href="#!" class="text-reset">Privacy and Policy</a>
-        </p>
-        <p>
-          <a href="#!" class="text-reset">Settings</a>
-        </p>
-        <p>
-          <a href="#!" class="text-reset">Orders</a>
-        </p>
-        <p>
-          <a href="#!" class="text-reset">Help</a>
-        </p>
-      </div>
-      <!-- Grid column -->
-
-      <!-- Grid column -->
-      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-        <!-- Links -->
-        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-        <p><i class="fas fa-home me-3"></i> Thinleygang, Punakha.</p>
-        <p>
-          <i class="fas fa-envelope me-3"></i>
-          pk.dechentsemocs@education.gov.bt
-        </p>
-        <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
-        <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
-      </div>
-      <!-- Grid column -->
-    </div>
-    <!-- Grid row -->
-  </div>
-</section>
-<!-- Section: Links  -->
-
-<!-- Copyright -->
-<div
-  class="text-center p-4"
-  style="background-color: rgba(0, 0, 0, 0.05)"
->
-  © 2021 Copyright:
-  <a class="text-reset fw-bold" href="https://mdbootstrap.com/"
-    >Dechentsemocs.com</a
-  >
-</div>
-<!-- Copyright -->
-</footer>
-
 {% endblock %}
