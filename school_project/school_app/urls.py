@@ -1,11 +1,11 @@
 from django.urls import path
 from .views import (
-    home_view, about_view, dashboard_view, calendar_view, add_event, view_event, todo_list, add_todo, mark_completed, delete_todo, pie_chart_view, edit_attendance_view, update_attendance,
+    home_view, about_view, dashboard_view, calendar_view, add_event, view_event, todo_list, add_todo, mark_completed, delete_todo, edit_attendance_view, update_attendance,
     class_cleanliness_view, edit_class_cleanliness, delete_class_cleanliness, club_report_view, edit_club_report, delete_club_report, log_book_view, edit_log_book, delete_log_book,
     reading_log_view, edit_reading_log, delete_reading_log, staff_attendance_view, edit_staff_attendance, delete_staff_attendance, supw_report_view, edit_supw_report, delete_supw_report,
     teachers_substitution_view, edit_teachers_substitution, delete_teachers_substitution, teachers_timetable_view, edit_teachers_timetable, delete_teachers_timetable,
     tod_report_view, edit_tod_report, delete_tod_report, organization_chart_view, edit_organization_chart, delete_organization_chart, professional_development_view,
-    edit_professional_development, delete_professional_development, plc_report_view, edit_plc_report, delete_plc_report
+    edit_professional_development, delete_professional_development, plc_report_view, edit_plc_report, delete_plc_report,pie_chart_view
 )
 
 urlpatterns = [
@@ -19,7 +19,6 @@ urlpatterns = [
     path('add_todo/', add_todo, name='add_todo'),
     path('mark_completed/<int:todo_id>/', mark_completed, name='mark_completed'),
     path('delete_todo/<int:todo_id>/', delete_todo, name='delete_todo'),
-    path('pie_chart/', pie_chart_view, name='pie_chart'),
     path('edit_attendance/', edit_attendance_view, name='edit_attendance'),
     path('update_attendance/', update_attendance, name='update_attendance'),
     path('class_cleanliness/', class_cleanliness_view, name='class_cleanliness'),
@@ -58,4 +57,5 @@ urlpatterns = [
     path('plc_report/', plc_report_view, name='plc_report'),
     path('plc_report/edit/<int:pk>/', edit_plc_report, name='edit_plc_report'),
     path('plc_report/delete/<int:pk>/', delete_plc_report, name='delete_plc_report'),
+    path('pie_chart/', pie_chart_view, name='pie_chart'),
 ]

@@ -1,4 +1,6 @@
 import json
+from datetime import datetime
+import calendar
 from .forms import EventForm, TodoForm
 from .models import Student, Teacher, Event, Todo, Attendance
 from django.views.decorators.csrf import csrf_exempt
@@ -12,9 +14,9 @@ from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from .forms import ClassCleanlinessForm, ClubReportForm, LogBookForm, ReadingLogForm, StaffAttendanceForm, SUPWReportForm, TeachersSubstitutionForm, TeachersTimetableForm, TODReportForm, OrganizationChartForm, ProfessionalDevelopmentForm, PLCReportForm
 from .models import ClassCleanliness, ClubReport, LogBook, ReadingLog, StaffAttendance, SUPWReport, TeachersSubstitution, TeachersTimetable, TODReport, OrganizationChart, ProfessionalDevelopment, PLCReport
-
-
-
+import matplotlib.pyplot as plt
+import io
+from django.http import HttpResponse
 
 def about_view(request):
     return render(request, 'school_app/about.html')
@@ -104,23 +106,6 @@ def delete_todo(request, todo_id):
     todo = get_object_or_404(Todo, id=todo_id)
     todo.delete()
     return redirect('dashboard')
-
-
-def pie_chart_view(request):
-    labels = ['Math', 'Science', 'English', 'History']
-    sizes = [15, 30, 45, 10]
-    colors = ['gold', 'yellowgreen', 'lightcoral', 'lightskyblue']
-    explode = (0.1, 0, 0, 0)
-
-    plt.pie(sizes, explode=explode, labels=labels, colors=colors,
-            autopct='%1.1f%%', shadow=True, startangle=140)
-    plt.axis('equal')
-
-    buffer = BytesIO()
-    plt.savefig(buffer, format='png')
-    buffer.seek(0)
-    return HttpResponse(buffer, content_type='image/png')
-
 
 def edit_attendance_view(request):
     teachers = Teacher.objects.all()
@@ -542,19 +527,105 @@ def delete_plc_report(request, pk):
         return JsonResponse({'success': True})
     return JsonResponse({'success': False})
 
+
+def generate_calendar(year, month):
+    cal = calendar.HTMLCalendar().formatmonth(year, month)
+    return cal
+
 def home_view(request):
+    student_count = Student.objects.count()
+    teacher_count = Teacher.objects.count()
+    year = datetime.now().year
+    month = datetime.now().month
+    calendar_html = generate_calendar(year, month)
+
+    labels = ["Students", "Teachers"]
+    data = [student_count, teacher_count]
+
     dashboard_items = [
-        {"title": "Class Cleanliness", "url_name": "class_cleanliness", "img_path": "Images/dashboard/class-cleanliness.png"},
-        {"title": "Club Report", "url_name": "club_report", "img_path": "Images/dashboard/club-report.png"},
-        {"title": "Log Book", "url_name": "log_book", "img_path": "Images/dashboard/log-book.png"},
-        {"title": "Reading Log", "url_name": "reading_log", "img_path": "Images/dashboard/reading-log.png"},
-        {"title": "Staff Attendance", "url_name": "staff_attendance", "img_path": "Images/dashboard/staff-attendance.png"},
-        {"title": "SUPW Report", "url_name": "supw_report", "img_path": "Images/dashboard/supw-report.png"},
-        {"title": "Teachers Substitution", "url_name": "teachers_substitution", "img_path": "Images/dashboard/teachers-substitution.png"},
-        {"title": "Teacher's Timetable", "url_name": "teachers_timetable", "img_path": "Images/dashboard/teachers-timetable.png"},
-        {"title": "TOD Report", "url_name": "tod_report", "img_path": "Images/dashboard/tod-report.png"},
-        {"title": "Organization Chart", "url_name": "organization_chart", "img_path": "Images/dashboard/organogram.png"},
-        {"title": "Professional Development", "url_name": "professional_development", "img_path": "Images/dashboard/pd.png"},
-        {"title": "PLC Report", "url_name": "plc_report", "img_path": "Images/dashboard/plc-report.png"},
+        {'url_name': 'class_cleanliness', 'img_path': 'Images/dashboard/class-cleanliness.png', 'title': 'Class Cleanliness'},
+        {'url_name': 'club_report', 'img_path': 'Images/dashboard/club-report.png', 'title': 'Club Report'},
+        {'url_name': 'log_book', 'img_path': 'Images/dashboard/log-book.png', 'title': 'Log Book'},
+        {'url_name': 'reading_log', 'img_path': 'Images/dashboard/reading-log.png', 'title': 'Reading Log'},
+        {'url_name': 'staff_attendance', 'img_path': 'Images/dashboard/staff-attendance.png', 'title': 'Staff Attendance'},
+        {'url_name': 'supw_report', 'img_path': 'Images/dashboard/supw-report.png', 'title': 'SUPW Report'},
+        {'url_name': 'teachers_substitution', 'img_path': 'Images/dashboard/teachers-substitution.png', 'title': 'Teachers Substitution'},
+        {'url_name': 'teachers_timetable', 'img_path': 'Images/dashboard/teachers-timetable.png', 'title': "Teacher's Timetable"},
+        {'url_name': 'tod_report', 'img_path': 'Images/dashboard/tod-report.png', 'title': 'TOD Report'},
+        {'url_name': 'organization_chart', 'img_path': 'Images/dashboard/organogram.png', 'title': 'Organization Chart'},
+        {'url_name': 'professional_development', 'img_path': 'Images/dashboard/pd.png', 'title': 'Professional Development'},
+        {'url_name': 'plc_report', 'img_path': 'Images/dashboard/plc-report.png', 'title': 'PLC Report'},
     ]
-    return render(request, 'school_app/home.html', {'dashboard_items': dashboard_items})
+    return render(request, 'school_app/home.html', {
+        'student_count': student_count,
+        'teacher_count': teacher_count,
+        'labels': labels,
+        'data': data,
+        'dashboard_items': dashboard_items,
+        'calendar_html': calendar_html,
+    })
+
+# from django.utils.safestring import mark_safe
+# from cal.utils import Calendar
+
+# def generate_calendar(year, month):
+#     cal = Calendar(year, month)
+#     html_cal = cal.formatmonth(withyear=True)
+#     return mark_safe(html_cal)
+
+# def home_view(request):
+#     student_count = Student.objects.count()
+#     teacher_count = Teacher.objects.count()
+#     year = datetime.now().year
+#     month = datetime.now().month
+#     calendar_html = generate_calendar(year, month)
+
+#     labels = ["Students", "Teachers"]
+#     data = [student_count, teacher_count]
+
+#     dashboard_items = [
+#         {'url_name': 'class_cleanliness', 'img_path': 'Images/dashboard/class-cleanliness.png', 'title': 'Class Cleanliness'},
+#         {'url_name': 'club_report', 'img_path': 'Images/dashboard/club-report.png', 'title': 'Club Report'},
+#         {'url_name': 'log_book', 'img_path': 'Images/dashboard/log-book.png', 'title': 'Log Book'},
+#         {'url_name': 'reading_log', 'img_path': 'Images/dashboard/reading-log.png', 'title': 'Reading Log'},
+#         {'url_name': 'staff_attendance', 'img_path': 'Images/dashboard/staff-attendance.png', 'title': 'Staff Attendance'},
+#         {'url_name': 'supw_report', 'img_path': 'Images/dashboard/supw-report.png', 'title': 'SUPW Report'},
+#         {'url_name': 'teachers_substitution', 'img_path': 'Images/dashboard/teachers-substitution.png', 'title': 'Teachers Substitution'},
+#         {'url_name': 'teachers_timetable', 'img_path': 'Images/dashboard/teachers-timetable.png', 'title': "Teacher's Timetable"},
+#         {'url_name': 'tod_report', 'img_path': 'Images/dashboard/tod-report.png', 'title': 'TOD Report'},
+#         {'url_name': 'organization_chart', 'img_path': 'Images/dashboard/organogram.png', 'title': 'Organization Chart'},
+#         {'url_name': 'professional_development', 'img_path': 'Images/dashboard/pd.png', 'title': 'Professional Development'},
+#         {'url_name': 'plc_report', 'img_path': 'Images/dashboard/plc-report.png', 'title': 'PLC Report'},
+#     ]
+#     return render(request, 'school_app/home.html', {
+#         'student_count': student_count,
+#         'teacher_count': teacher_count,
+#         'labels': labels,
+#         'data': data,
+#         'dashboard_items': dashboard_items,
+#         'calendar_html': calendar_html,
+#     })
+
+
+def pie_chart_view(request):
+    student_count = Student.objects.count()
+    teacher_count = Teacher.objects.count()
+
+    labels = ['Students', 'Teachers']
+    sizes = [student_count, teacher_count]
+    colors = ['#36A2EB', '#FF6384']
+    explode = (0.1, 0)  # explode the 1st slice (i.e. 'Students')
+
+    plt.figure(figsize=(6, 6))
+    plt.pie(sizes, explode=explode, labels=labels, colors=colors, autopct='%1.1f%%',
+            shadow=True, startangle=140)
+    plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+
+    # Save it to a BytesIO object
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    plt.close()
+    buf.seek(0)
+
+    return HttpResponse(buf.getvalue(), content_type='image/png')
+

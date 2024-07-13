@@ -23,7 +23,7 @@ School{% endblock %} {% block content %}
               <div class="buttons">
                 <a href="{% url 'about' %}" class="button1">About Us</a>
                 <a href="{% url 'dashboard' %}" class="button1">Dashboard</a>
-                <a href="{% url 'calendar' %}" class="button1">Calendar</a>
+                <a href="{% url 'cal:calendar' %}" class="button1">Calendar</a>
                 <a href="{% url 'add_event' %}" class="button1">Add Event</a>
                 <a href="{% url 'todo_list' %}" class="button1">Todo List</a>
               </div>
@@ -46,7 +46,7 @@ School{% endblock %} {% block content %}
               <div class="buttons">
                 <a href="{% url 'about' %}" class="button1">About Us</a>
                 <a href="{% url 'dashboard' %}" class="button1">Dashboard</a>
-                <a href="{% url 'calendar' %}" class="button1">Calendar</a>
+                <a href="{% url 'cal:calendar' %}" class="button1">Calendar</a>
                 <a href="{% url 'add_event' %}" class="button1">Add Event</a>
                 <a href="{% url 'todo_list' %}" class="button1">Todo List</a>
               </div>
@@ -139,6 +139,24 @@ School{% endblock %} {% block content %}
   </div>
 </section>
 
+<!-- Statistics Section -->
+<section class="statistics my-5">
+  <div class="container">
+    <div class="row">
+      <!-- School Statistics -->
+      <div class="col-lg-6">
+        <h3 class="text-center">School Statistics</h3>
+        <img src="{% url 'pie_chart' %}" class="img-fluid" alt="Pie Chart" />
+      </div>
+      <!-- School Calendar -->
+      <div class="col-lg-6">
+        <h2 class="text-center">School Calendar</h2>
+        <div class="calendar" id="calendar">{{ calendar_html|safe }}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="dashboard mt-5 mb-5">
   <div class="container">
     <div class="row">
@@ -165,4 +183,5 @@ School{% endblock %} {% block content %}
     </div>
   </div>
 </section>
+
 {% endblock %}
